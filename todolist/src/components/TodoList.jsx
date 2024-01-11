@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
-export default function TodoList({ todos, onUpdate }) {
+export default function TodoList({ todos, onUpdate, onDelete }) {
   const [search, setSearch] = useState("");
 
   const onChangeSearch = (e) => {
@@ -30,7 +30,12 @@ export default function TodoList({ todos, onUpdate }) {
       <div className="todos_wrapper">
         {/* map을 이용해 리스트 형태로 렌더링, key props필수 */}
         {filterTodos().map((todo) => (
-          <TodoItem key={todo.id} {...todo} onUpdate={onUpdate} />
+          <TodoItem
+            key={todo.id}
+            {...todo}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
         ))}
       </div>
     </div>
