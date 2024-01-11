@@ -41,11 +41,19 @@ function App() {
     setTodos([...todos, newTodo]); //기존 배열+새로운 요소 추가
   };
 
+  const onUpdate = (targetId) => {
+    setTodos(
+      todos.map((todo) => {
+        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo;
+      })
+    );
+  };
+
   return (
     <div className="App">
       <Header />
       <TodoEditor onCreate={onCreate} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onUpdate={onUpdate} />
     </div>
   );
 }
