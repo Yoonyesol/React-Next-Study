@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef, useReducer } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import TodoEditor from "./components/TodoEditor";
@@ -25,32 +25,49 @@ const mockData = [
   },
 ];
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "CREATE": {
+      return [...state, action.data];
+    }
+    case "UPDATE": {
+      return state.map((todo) =>
+        todo.id === action.id ? { ...todo, isDone: !todo.isDone } : todo
+      );
+    }
+    case "DELETE": {
+      return state.filter((todo) => todo.id !== action.data);
+    }
+  }
+}
+
 function App() {
-  const [todos, setTodos] = useState(mockData);
+  const [todos, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
 
   const onCreate = (content) => {
-    //content: input 태그에 사용자가 입력한 투두 항목
-    const newTodo = {
-      id: idRef.current++,
-      isDone: false,
-      content: content, //content로만 작성해도 가능(js 특성)
-      createdDate: new Date().getTime(),
-    }; //객체로 만드는 이유: 그렇게 설계해놨기 때문(mockData)
-
-    setTodos([...todos, newTodo]); //기존 배열+새로운 요소 추가
+    //setTodo 대신 dispatch
+    dispatch({
+      //action객체
+      type: "CREATE",
+      data: {
+        id: idRef.current++,
+        isDone: false,
+        content: content, //content로만 작성해도 가능(js 특성)
+        createdDate: new Date().getTime(),
+      }, //객체로 만드는 이유: 그렇게 설계해놨기 때문(mockData)
+    });
   };
 
   const onUpdate = (targetId) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
+    dispatch({
+      type: "UPDATE",
+      data: targetId,
+    });
   };
 
   const onDelete = (targetId) => {
-    setTodos(todos.filter((todo) => todo.id !== targetId));
+    dispatch({ type: "DELETE", data: targetId });
   };
 
   return (
