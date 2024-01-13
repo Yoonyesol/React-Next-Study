@@ -1,9 +1,9 @@
-import { useRef, useReducer, useCallback } from "react";
+import { useRef, useReducer, useCallback, useMemo } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import TodoEditor from "./components/TodoEditor";
 import TodoList from "./components/TodoList";
-import { TodoContext } from "./TodoContext";
+import { TodoDispatchContext, TodoStateContext } from "./TodoContext";
 
 const mockData = [
   {
@@ -71,13 +71,20 @@ function App() {
     dispatch({ type: "DELETE", data: targetId });
   }, []);
 
+  //TodoDispatchContext 내부 value 객체가 재생성되지 않도록 막는 코드(재생성되지 않는 객체를 전달해주기 위해)
+  const memoizedDispatches = useMemo(() => {
+    return { onCreate, onUpdate, onDelete };
+  }, []);
+
   return (
     <div className="App">
       <Header />
-      <TodoContext.Provider value={{ todos, onCreate, onUpdate, onDelete }}>
-        <TodoEditor onCreate={onCreate} />
-        <TodoList todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
-      </TodoContext.Provider>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatches}>
+          <TodoEditor />
+          <TodoList />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }

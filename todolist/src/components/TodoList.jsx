@@ -1,10 +1,10 @@
 import { useContext, useMemo, useState } from "react";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
-import { TodoContext } from "../TodoContext";
+import { TodoStateContext } from "../TodoContext";
 
 export default function TodoList() {
-  const { todos, onUpdate, onDelete } = useContext(TodoContext);
+  const todos = useContext(TodoStateContext); //구조분해 할당 없이 가져오기
 
   const [search, setSearch] = useState("");
 
