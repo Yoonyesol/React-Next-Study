@@ -32,7 +32,7 @@ function reducer(state, action) {
     }
     case "UPDATE": {
       return state.map((todo) =>
-        todo.id === action.id ? { ...todo, isDone: !todo.isDone } : todo
+        todo.id === action.data ? { ...todo, isDone: !todo.isDone } : todo
       );
     }
     case "DELETE": {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
@@ -19,9 +19,27 @@ export default function TodoList({ todos, onUpdate, onDelete }) {
     );
   };
 
+  //구조분해 할당으로 받아오기
+  const { totalCount, doneCount, notDoneCount } = useMemo(() => {
+    //실행할 내용이 담긴 콜백함수
+    const totalCount = todos.length;
+    const doneCount = todos.filter((todo) => todo.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+    return {
+      totalCount,
+      doneCount,
+      notDoneCount,
+    };
+  }, [todos]); //todos의 값이 바뀔 때마다 실행된다.
+
   return (
     <div className="TodoList">
       <h4>Todos</h4>
+      <div>
+        <div>전체 todo: {totalCount}</div>
+        <div>완료 todo: {doneCount}</div>
+        <div>미완 todo: {notDoneCount}</div>
+      </div>
       <input
         value={search}
         onChange={onChangeSearch}
