@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./SearchBar.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar() {
+export default function SearchBar({ q }) {
   const [search, setSearch] = useState("");
   const nav = useNavigate();
+
+  useEffect(() => {
+    //검색한 내용을 서치바에 띄우기
+    setSearch(q);
+  }, [q]);
 
   const onChangeSearch = (e) => {
     setSearch(e.target.value);

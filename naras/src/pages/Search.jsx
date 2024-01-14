@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchSearchResults } from "../api";
+import SearchBar from "./../components/SearchBar";
+import CountryList from "./../components/CountryList";
+import style from "./Search.module.css";
 
 export default function Search() {
   //searchParams: 현재 어떤 쿼리 스트링이 저장되어 있는지 정보를 담고 있는 객체
@@ -19,5 +22,13 @@ export default function Search() {
     setInitData();
   }, [q]);
 
-  return <div></div>;
+  return (
+    <div className={style.container}>
+      <SearchBar q={q} />
+      <div>
+        <b>{q}</b> 검색 결과
+      </div>
+      <CountryList countries={countries} />
+    </div>
+  );
 }
