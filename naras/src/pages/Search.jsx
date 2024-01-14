@@ -13,7 +13,6 @@ export default function Search() {
   const setInitData = async () => {
     const data = await fetchSearchResults(q);
     setCountries(data);
-    console.log(data);
   };
 
   useEffect(() => {

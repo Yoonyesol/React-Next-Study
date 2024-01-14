@@ -9,6 +9,7 @@
   align-items: center; /* 세로축 기준 정 가운데 위치 */
   justify-content: center; /* 가로축 기준 정 가운데 위치 */
   font-weight: bold;
+  cursor: pointer;
 }
 
 .main {
