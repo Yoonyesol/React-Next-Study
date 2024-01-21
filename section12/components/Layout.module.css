@@ -1,0 +1,19 @@
+.header {
+  position: fixed; /* 스크롤 내려도 최상단 유지 */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  align-items: center; /* 세로축 기준 정 가운데 위치 */
+  justify-content: center; /* 가로축 기준 정 가운데 위치 */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main {
+  max-width: 700px;
+  margin: 0 auto; /* 화면 정 가운데 위치 */
+  padding: 80px 10px; /* 헤더에 가리는 부분 패딩 */
+}
