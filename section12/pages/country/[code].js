@@ -43,5 +43,6 @@ export const getStaticProps = async (context) => {
 
   return {
     props: { country },
+    revalidate: 3, //3초 주기로 페이지 재생성
   };
 };
