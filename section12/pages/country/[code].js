@@ -16,7 +16,14 @@ export default function Country({ country }) {
 
 Country.Layout = SubLayout; //SubLayout을 적용시켜준다.
 
-export const getServerSideProps = async (context) => {
+export const getStaticPaths = async () => {
+  return {
+    path: [{ params: { code: "ABW" } }, { params: { code: "KOR" } }],
+    fallback: false, //path에 명시하지 않은 경로의 요청이 오면 404페이지 반환
+  };
+};
+
+export const getStaticProps = async (context) => {
   const { code } = context.params;
 
   let country = null;
