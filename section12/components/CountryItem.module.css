@@ -9,7 +9,7 @@
 .flag_img {
   width: 100%; /* 컨테이너 꽉 채우도록 */
   height: 150px;
-  object-fit: cover; /* 이미지가 화면에 꽉 차도록 */
+  position: relative; /*fill은 부모태그의 relative 발견 시까지 거슬러올라감*/
 }
 
 .content {
