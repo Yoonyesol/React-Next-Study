@@ -2,6 +2,7 @@ import { fetchSearchResults } from "@/api";
 import CountryList from "@/components/CountryList";
 import SearchBar from "@/components/SearchBar";
 import SubLayout from "@/components/SubLayout";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,15 @@ export default function Search() {
 
   return (
     <>
+      <Head>
+        <title>NARAS 검색 결과</title>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="NARAS 검색 결과" />
+        <meta
+          property="og:describe"
+          content="전 세계 국가들의 정보를 확인해보세요"
+        />
+      </Head>
       <SearchBar q={q} />
       <CountryList countries={countries} />
     </>
