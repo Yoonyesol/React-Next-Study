@@ -28,7 +28,7 @@ Country.Layout = SubLayout; //SubLayout을 적용시켜준다.
 
 export const getStaticPaths = async () => {
   return {
-    path: [{ params: { code: "ABW" } }, { params: { code: "KOR" } }],
+    paths: [{ params: { code: "ABW" } }, { params: { code: "KOR" } }],
     fallback: true,
   };
 };

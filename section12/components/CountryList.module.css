@@ -1,0 +1,5 @@
+.container {
+  display: flex;
+  flex-wrap: wrap; /* 화면 사이즈에 맞게 다음 칸으로 넘기기*/
+  gap: 20px;
+}
